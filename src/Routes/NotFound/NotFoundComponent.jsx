@@ -5,7 +5,7 @@ export const NotFoundComponent = () => {
   return (
     <div className='noFound'>
         <h1>The page is not found</h1>
-        <Link to={"/home"}><p>Click here to homepage...</p></Link>
+        <Link to={"/"}><p>Click here to homepage...</p></Link>
     </div>
   )
 }
