@@ -31,14 +31,57 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const { user } = result;
+        return user;
+    } catch (error) {
+        console.error('Error signing in with Google:', error.message);
+        throw error;
+    }
+};
+
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-    const userDocRef = doc(db, 'users', userAuth.uid);
+// export const createUserDocumentFromAuth = async (userAuth) => {
+//     const userDocRef = doc(db, 'users', userAuth.uid);
 
+//     const userSnapshot = await getDoc(userDocRef);
+
+
+//     console.log(userSnapshot);
+
+
+
+//     if (!userSnapshot.exists()) {
+//         const { displayName, email } = userAuth;
+//         const createdAt = new Date();
+
+//         try {
+//             await setDoc(userDocRef, {
+//                 displayName,
+//                 email,
+//                 createdAt,
+//             });
+//         } catch (error) {
+//             console.log('error creating the user', error.message);
+//         }
+//     }
+
+//     return userDocRef;
+// };
+export const createUserDocumentFromAuth = async (userAuth) => {
+    if (!userAuth || !userAuth.uid) {
+        console.error('Invalid userAuth object or missing UID');
+        return null; // или нещо друго в зависимост от вашите изисквания
+    }
+
+    const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
+
+    console.log(userSnapshot);
 
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
@@ -51,7 +94,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
                 createdAt,
             });
         } catch (error) {
-            console.log('error creating the user', error.message);
+            console.error('Error creating the user document', error.message);
+            return null; // или нещо друго в зависимост от вашите изисквания
         }
     }
 
