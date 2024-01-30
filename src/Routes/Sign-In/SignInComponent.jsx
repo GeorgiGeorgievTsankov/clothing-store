@@ -1,5 +1,7 @@
 import React from 'react'
 import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../Utils/Firebase/Firebase.utils'
+import { SingUpFormComponent } from '../../Components/sing-up-form/SingUpFormComponent';
+import './SingInCss.css'
 
 export const SignInComponent = () => {
 
@@ -20,7 +22,8 @@ export const SignInComponent = () => {
 
 
     return (
-        <div>
+        <div className='sing-in-container'>
+            <SingUpFormComponent />
             <h1>
                 SignIn
             </h1>
