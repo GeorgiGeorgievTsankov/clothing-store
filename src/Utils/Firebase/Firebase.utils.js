@@ -1,16 +1,21 @@
+
 import { initializeApp } from 'firebase/app';
 import {
     getAuth,
     signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
+    createUserWithEmailAndPassword,
 } from 'firebase/auth';
+
+
 import {
     getFirestore,
     doc,
     getDoc,
     setDoc
 } from 'firebase/firestore';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDhKXktJQUAx0SovMqJTk5uLmXMhsgDrgQ",
@@ -21,7 +26,7 @@ const firebaseConfig = {
     appId: "1:1005459085588:web:525a5fd9b72215ac0a0a01"
 };
 
-// Initialize Firebase
+
 const firebaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
@@ -45,37 +50,14 @@ export const signInWithGooglePopup = async () => {
 
 export const db = getFirestore();
 
-// export const createUserDocumentFromAuth = async (userAuth) => {
-//     const userDocRef = doc(db, 'users', userAuth.uid);
 
-//     const userSnapshot = await getDoc(userDocRef);
-
-
-//     console.log(userSnapshot);
-
-
-
-//     if (!userSnapshot.exists()) {
-//         const { displayName, email } = userAuth;
-//         const createdAt = new Date();
-
-//         try {
-//             await setDoc(userDocRef, {
-//                 displayName,
-//                 email,
-//                 createdAt,
-//             });
-//         } catch (error) {
-//             console.log('error creating the user', error.message);
-//         }
-//     }
-
-//     return userDocRef;
-// };
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+    userAuth,
+    additionalInformation = {}
+) => {
     if (!userAuth || !userAuth.uid) {
         console.error('Invalid userAuth object or missing UID');
-        return null; // или нещо друго в зависимост от вашите изисквания
+        return null;
     }
 
     const userDocRef = doc(db, 'users', userAuth.uid);
@@ -92,12 +74,19 @@ export const createUserDocumentFromAuth = async (userAuth) => {
                 displayName,
                 email,
                 createdAt,
+                ...additionalInformation,
             });
         } catch (error) {
             console.error('Error creating the user document', error.message);
-            return null; // или нещо друго в зависимост от вашите изисквания
+            return null;
         }
     }
 
     return userDocRef;
 };
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    return await createUserWithEmailAndPassword(auth, email, password);
+}
