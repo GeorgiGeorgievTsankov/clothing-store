@@ -28,7 +28,7 @@ export const SignInComponent = () => {
         <div className='sing-in-container'>
             <div className="log-in-container">
                 <LogInComponent />
-                <ButtonComponent onClick={logGoogleUser} buttonType='google'>Log in with Google</ButtonComponent>
+                <ButtonComponent onClick={logGoogleUser} type="button" buttonType='google'>Log in with Google</ButtonComponent>
             </div>
             <div className="sing-up">
                 <SingUpFormComponent />
