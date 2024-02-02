@@ -24,18 +24,21 @@ export const LogInComponent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("komppppp");
+
         try {
             const response = await signInAuthUserWithEmailAndPassword(email, password)
             console.log(response);
             resetForm();
 
         } catch (error) {
-
-
-        }
-    };
-
+            if (error.code === "auth/wrong-password") {
+                alert('Incorect password for email');
+            } else if (error.code === "auth/user-not-found") {
+                alert('User not found');
+            }
+        };
+    }
+    
     const handleChange = (e) => {
         const { name, value } = e.target
 
@@ -67,7 +70,7 @@ export const LogInComponent = () => {
                     onChange={handleChange}
                 />
             </form>
-            <ButtonComponent buttonType='button-container' type="submit" onClick = {handleSubmit}>Log in</ButtonComponent>
+            <ButtonComponent buttonType='button-container' type="submit" onClick={handleSubmit}>Log in</ButtonComponent>
         </div>
     )
 };
