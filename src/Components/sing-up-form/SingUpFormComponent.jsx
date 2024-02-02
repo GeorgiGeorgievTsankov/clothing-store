@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './SingUpFormCSS.css'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../Utils/Firebase/Firebase.utils';
 import { FormInputComponent } from '../FormInput/FormInputComponent';
+import { ButtonComponent } from '../Button/ButtonComponent';
 
 const defaultFormFIeld = {
     displayName: '',
@@ -32,6 +33,8 @@ export const SingUpFormComponent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log("raboti");
+
         if (password !== confirmPassword) {
             console.error('Passwords do not match.');
             return;
@@ -54,6 +57,7 @@ export const SingUpFormComponent = () => {
 
     return (
         <div className='sing-up-container'>
+            <h2>Don't have an account?</h2>
             <h1>Sign up whit your email and password </h1>
             <form onSubmit={handleSubmit} className="sign-up-form">
                 <FormInputComponent
@@ -92,8 +96,9 @@ export const SingUpFormComponent = () => {
                     required
                     onChange={handleChange}
                 />
-                <button type="submit">Sign Up</button>
+                           
             </form>
+            <ButtonComponent buttonType='button-container'onClick = {handleSubmit} type="submit">Sing in</ButtonComponent>
         </div>
     )
 };
