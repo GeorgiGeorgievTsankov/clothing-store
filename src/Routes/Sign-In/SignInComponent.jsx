@@ -1,7 +1,10 @@
+
 import React from 'react'
 import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../Utils/Firebase/Firebase.utils'
 import { SingUpFormComponent } from '../../Components/sing-up-form/SingUpFormComponent';
 import './SingInCss.css'
+import { LogInComponent } from '../../Components/LogIn/LogInComponent';
+import { ButtonComponent } from '../../Components/Button/ButtonComponent';
 
 export const SignInComponent = () => {
 
@@ -9,7 +12,7 @@ export const SignInComponent = () => {
         try {
             const user = await signInWithGooglePopup();
             console.log("Logged in user:", user);
-    
+
             if (user) {
                 const userDocRef = await createUserDocumentFromAuth(user);
                 console.log("User document reference:", userDocRef);
@@ -18,16 +21,20 @@ export const SignInComponent = () => {
             console.error("Error logging in with Google:", error.message);
         }
     };
-    
+
 
 
     return (
         <div className='sing-in-container'>
-            <SingUpFormComponent />
-            <h1>
-                SignIn
-            </h1>
-            <button onClick={logGoogleUser}>Sing In with googlePopup</button>
+            <div className="log-in-container">
+                <LogInComponent />
+                <ButtonComponent onClick={logGoogleUser} buttonType='google'>Log in with Google</ButtonComponent>
+            </div>
+            <div className="sing-up">
+                <SingUpFormComponent />
+            </div>
+
+
         </div>
 
     )
