@@ -1,8 +1,11 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from '../../Utils/Firebase/Firebase.utils';
 import { FormInputComponent } from '../FormInput/FormInputComponent';
 import { ButtonComponent } from '../Button/ButtonComponent';
+import { UserContext } from '../../Contexts/UserContext';
+
+
 
 const defaultFormFIeld = {
     email: '',
@@ -15,8 +18,8 @@ export const LogInComponent = () => {
 
     const [formField, setFormField] = useState(defaultFormFIeld);
     const { email, password } = formField;
-
-
+ 
+    const { setCurrentUser } = useContext(UserContext);  
 
     const resetForm = () => {
         setFormField(defaultFormFIeld);
@@ -26,11 +29,11 @@ export const LogInComponent = () => {
         e.preventDefault();
 
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password)
-            console.log(response);
+            const {user} = await signInAuthUserWithEmailAndPassword(email, password)
+            setCurrentUser(user)
             resetForm();
 
-        } catch (error) {
+        } catch (error) {  
             if (error.code === "auth/wrong-password") {
                 alert('Incorect password for email');
             } else if (error.code === "auth/user-not-found") {
@@ -38,7 +41,7 @@ export const LogInComponent = () => {
             }
         };
     }
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target
 
