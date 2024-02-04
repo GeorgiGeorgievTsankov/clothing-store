@@ -19,6 +19,8 @@ export const SingUpFormComponent = () => {
     const [formField, setFormField] = useState(defaultFormFIeld);
     const { displayName, email, password, confirmPassword } = formField;
 
+    const { setCurrentUser } = useContext(UserContext);
+
     const handleChange = (e) => {
         const { name, value } = e.target
 
