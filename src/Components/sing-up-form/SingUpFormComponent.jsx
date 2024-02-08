@@ -1,9 +1,11 @@
+
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './SingUpFormCSS.css'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../Utils/Firebase/Firebase.utils';
 import { FormInputComponent } from '../FormInput/FormInputComponent';
 import { ButtonComponent } from '../Button/ButtonComponent';
+import { UserContext } from '../../Contexts/UserContext';
 
 const defaultFormFIeld = {
     displayName: '',
@@ -19,7 +21,7 @@ export const SingUpFormComponent = () => {
     const [formField, setFormField] = useState(defaultFormFIeld);
     const { displayName, email, password, confirmPassword } = formField;
 
-    const { setCurrentUser } = useContext(UserContext);
+    const {setCurrentUser} = useContext(UserContext);
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -45,8 +47,9 @@ export const SingUpFormComponent = () => {
         try {
 
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
-            
-            setCurrentUser{user};
+
+            setCurrentUser(user);
+
             await createUserDocumentFromAuth(user, { displayName })
 
             resetForm();
