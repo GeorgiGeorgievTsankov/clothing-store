@@ -1,39 +1,32 @@
-
-import './App.css'
-import { DirectoryComponent } from './Components/Directory/DirectoryComponent';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomeComponents from "./Routes/Home/HomeComponent";
+import { NavigationComponent } from './Routes/Navigation/NavigationComponent';
+import { NotFoundComponent } from './Routes/NotFound/NotFoundComponent';
+import { SignInComponent } from './Routes/Sign-In/SignInComponent';
+import { ShopPageComponent } from './Routes/ShopPage/ShopPageComponent';
 
 
 const App = () => {
 
-  const categories = [
-    {
-      "id": 1,
-      "title": "hats",
-      "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
-    },
-    {
-      "id": 2,
-      "title": "jackets",
-      "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
-    },
-    {
-      "id": 3,
-      "title": "sneakers",
-      "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
-    },
-    {
-      "id": 4,
-      "title": "womans",
-      "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
-    },
-    {
-      "id": 5,
-      "title": "mens",
-      "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
-    }
-  ]
-
-  return (<DirectoryComponent categories={categories}/>)
+  return (
+    <Router>
+      <NavigationComponent />
+      <Switch>
+        <Route exact path="/">
+          <HomeComponents />
+        </Route>
+        <Route path="/sign-in">
+          <SignInComponent />
+        </Route>
+        <Route path="/shop">
+          <ShopPageComponent />
+        </Route>
+        <Route path="*">
+          <NotFoundComponent />
+        </Route>
+      </Switch>
+    </Router>
+  );
 
 }
 
