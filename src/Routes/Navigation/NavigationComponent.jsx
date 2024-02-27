@@ -9,12 +9,7 @@ import { singOutUser } from '../../Utils/Firebase/Firebase.utils'
 
 export const NavigationComponent = () => {
 
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const singOutHandler = async () => {
-     await singOutUser()
-     setCurrentUser(null);
-  }
+  const { currentUser } = useContext(UserContext);
   
 
   return (
@@ -28,7 +23,7 @@ export const NavigationComponent = () => {
         </Link>
         {
           currentUser ?
-            (<span className='nav-link' onClick={singOutHandler}>SING OUT</span>)
+            (<span className='nav-link' onClick={singOutUser}>SING OUT</span>)
             :
             (<Link className='nav-link' to='/sign-in'>
               SIGN IN
@@ -40,3 +35,4 @@ export const NavigationComponent = () => {
     </div>
   )
 }
+
