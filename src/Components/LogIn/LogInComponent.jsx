@@ -1,9 +1,11 @@
+
 import React from 'react'
-import { useState, useContext} from 'react';
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from '../../Utils/Firebase/Firebase.utils';
+import { useState} from 'react';
+import { signInAuthUserWithEmailAndPassword} from '../../Utils/Firebase/Firebase.utils';
 import { FormInputComponent } from '../FormInput/FormInputComponent';
 import { ButtonComponent } from '../Button/ButtonComponent';
-import { UserContext } from '../../Contexts/UserContext';
+
+
 
 
 
@@ -18,26 +20,28 @@ export const LogInComponent = () => {
 
     const [formField, setFormField] = useState(defaultFormFIeld);
     const { email, password } = formField;
- 
-    const { setCurrentUser } = useContext(UserContext);  
+  
 
     const resetForm = () => {
         setFormField(defaultFormFIeld);
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         try {
             const {user} = await signInAuthUserWithEmailAndPassword(email, password)
-            setCurrentUser(user)
+            
+          
             resetForm();
 
         } catch (error) {  
             if (error.code === "auth/wrong-password") {
-                alert('Incorect password for email');
+                console.log('Incorrect password for email');
             } else if (error.code === "auth/user-not-found") {
-                alert('User not found');
+                console.log('User not found');
             }
         };
     }
@@ -71,6 +75,7 @@ export const LogInComponent = () => {
                     name="password"
                     required
                     onChange={handleChange}
+                    
                 />
             </form>
             <ButtonComponent buttonType='button-container' type="submit" onClick={handleSubmit}>Log in</ButtonComponent>
