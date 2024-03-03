@@ -37,9 +37,8 @@ export const NavigationComponent = () => {
         }
         <CartIconComponent />
       </div>     
-      {
-        isCartOpen ? <CartDropdownComponent /> : ""
-      }
+      {isCartOpen && <CartDropdownComponent />}
     </div>
   )
 }
+
