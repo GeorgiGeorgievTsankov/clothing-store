@@ -1,6 +1,6 @@
 import './ProductCardStyles.css';
 
-import Button from '../Button/ButtonComponent';
+import {ButtonComponent} from '../Button/ButtonComponent';
 
 const ProductCardComponent = ({ product }) => {
   const { name, price, imageUrl } = product;
@@ -11,9 +11,9 @@ const ProductCardComponent = ({ product }) => {
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
       </div>
-      <Button buttonType='inverted'>Add to card</Button>
+      <ButtonComponent buttonType='inverted'>Add to card</ButtonComponent>
     </div>
   );
 };
 
-export default ProductCard;
+export default ProductCardComponent;
