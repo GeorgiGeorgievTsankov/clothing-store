@@ -4,6 +4,7 @@ import { NavigationComponent } from './Routes/Navigation/NavigationComponent';
 import { NotFoundComponent } from './Routes/NotFound/NotFoundComponent';
 import { SignInComponent } from './Routes/Sign-In/SignInComponent';
 import { ShopPageComponent } from './Routes/ShopPage/ShopPageComponent';
+import { CheckoutComponent } from './Routes/Checkout/CheckoutComponent';
 
 
 const App = () => {
@@ -20,6 +21,9 @@ const App = () => {
         </Route>
         <Route path="/shop">
           <ShopPageComponent />
+        </Route>
+        <Route path="/checkout">
+          <CheckoutComponent />
         </Route>
         <Route path="*">
           <NotFoundComponent />
