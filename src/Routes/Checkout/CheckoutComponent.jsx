@@ -20,7 +20,9 @@ export const CheckoutComponent = () => {
                     <div key={id}>
                         <h2>{name}</h2>
                         <span>{quantity}</span>
+                        <br />
                         <span>decrement</span>
+                        <br />
                         <span onClick={() => addItemToCart(cartItem)}>increment</span>
                     </div>
                 )
