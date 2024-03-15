@@ -7,7 +7,7 @@ import { CartContext, addCartItem } from '../../Contexts/CartContext'
 
 export const CheckoutComponent = () => {
 
-    const { cartItems, addItemToCart } = useContext(CartContext);
+    const { cartItems, addItemToCart, removeItemToCart } = useContext(CartContext);
 
 
     return (
@@ -21,7 +21,7 @@ export const CheckoutComponent = () => {
                         <h2>{name}</h2>
                         <span>{quantity}</span>
                         <br />
-                        <span>decrement</span>
+                        <span onClick={() => removeItemToCart(cartItem)}>decrement</span>
                         <br />
                         <span onClick={() => addItemToCart(cartItem)}>increment</span>
                     </div>
