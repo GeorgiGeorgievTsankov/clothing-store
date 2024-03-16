@@ -17,6 +17,8 @@ import {
     setDoc,
     collection,
     writeBatch,
+    query,
+    getDocs,
 } from 'firebase/firestore';
 
 
@@ -53,7 +55,7 @@ export const signInWithGooglePopup = async () => {
 
 export const db = getFirestore();
 
-export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) =>{
+export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd, field) => {
     const collectionRef = collection(db, collectionKey)
     const batch = writeBatch(db);
 
@@ -63,7 +65,36 @@ export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) =>
     });
 
     await batch.commit();
-     console.log('done');
+    console.log('done');
+}
+
+// export const getCategoriesAndDocuments = async () => {
+//     const collectionRef = collection(db, 'categories');
+//     const q = query(collectionRef)
+
+//     const querySnapshot = await getDocs(q);
+
+//     const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+//         const { title, items } = docSnapshot.date();
+//         acc[title.toLowerCase()] = items;
+//         return acc;
+//      }, {})
+
+//      return categoryMap;
+// }
+
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const querySnapshot = await getDocs(collectionRef);
+
+    const categoryMap = {};
+
+    querySnapshot.forEach(docSnapshot => {
+        const { title, items } = docSnapshot.data();
+        categoryMap[title.toLowerCase()] = items;
+    });
+
+    return categoryMap;
 }
 
 
@@ -116,3 +147,4 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const singOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
+
