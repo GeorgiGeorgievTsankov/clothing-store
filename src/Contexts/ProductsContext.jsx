@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-import { getCategoriesAndDocuments } from '../Utils/Firebase/Firebase.utils.js'
+import { getCategoriesAndDocuments } from '../Utils/Firebase/Firebase.utils'
 
 export const CategoriesContext = createContext({
     categoriesMap: {},
@@ -9,15 +9,14 @@ export const CategoriesContext = createContext({
 export const CategoriesProvider = ({ children }) => {
 
     const [categoriesMap, setCategoriesMap] = useState({});
-
     useEffect(() => {
         const getCategoriesMap = async () => {
-            const categoryMap = await getCategoriesAndDocuments();
-            console.log(categoryMap);
-        }
+          const categoryMap = await getCategoriesAndDocuments('categories');
+          setCategoriesMap(categoryMap);
+        };
+    
         getCategoriesMap();
-
-    }, []);
+      }, []);
 
     const value = { categoriesMap };
 
@@ -25,3 +24,4 @@ export const CategoriesProvider = ({ children }) => {
         <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>
     )
 }
+
