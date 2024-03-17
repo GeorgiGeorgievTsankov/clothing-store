@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { CategoriesProvider } from "../../Contexts/ProductsContext"
+import { CategoriesContext } from "../../Contexts/ProductsContext"
 import ProductCardComponent from '../../Components/ProductCard/ProductCardComponent'
 
 import "../ShopPage/ShopPageStyle.css"
@@ -9,11 +9,21 @@ import "../ShopPage/ShopPageStyle.css"
 
 export const ShopPageComponent = () => {
 
-   const {products} =  useContext(CategoriesProvider)
+    const { categoriesMap } = useContext(CategoriesContext)
+    debugger
+    
     return (
-        <div className='products-container'>
-            {products.map(product => (
-            <ProductCardComponent key={product.id} product={ product }></ProductCardComponent>))}
+        <div>
+          {Object.keys(categoriesMap).map((title) => (
+            <div key={title}> 
+              <h2>{title}</h2>
+              <div className='products-container'>
+                {categoriesMap[title].map((product) => (
+                  <ProductCardComponent key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-    )
+      );
 }
