@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/sign-in">
           <SignInComponent />
         </Route>
-        <Route path="/shop/*">
+        <Route path="/shop">
           <ShopPageComponent />
         </Route>
         <Route path="/checkout">
