@@ -1,3 +1,7 @@
+
+
+
+
 import React from 'react'
 import { useContext,useEffect,useState } from 'react';
 import { CategoriesContext } from '../../Contexts/ProductsContext';
@@ -16,11 +20,8 @@ export const CategoryComponent = () => {
  }, [categoriesMap, category])
 
   return (
-  <div className='category-container'>
+  <div className='category-containers'>
      {products && products.map((product) => <ProductCardComponent key={product.id} product={product} />)}
   </div>
   )
 }
-
-
-
