@@ -6,7 +6,7 @@ export const DirectoryComponent = ({categories}) => {
     <div className="categories-container">
     {categories.map((category ) =>(
       <CategoryComponent key={category.id} category={category}/>
-    ))};
+    ))}
 
   </div>
   )
