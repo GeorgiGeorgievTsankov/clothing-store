@@ -4,24 +4,23 @@ import { SingUpFormComponent } from '../../Components/sing-up-form/SingUpFormCom
 import './SingInCss.css'
 import { LogInComponent } from '../../Components/LogIn/LogInComponent';
 import { ButtonComponent } from '../../Components/Button/ButtonComponent';
-import { UserContext } from '../../Contexts/UserContext';
-import { useContext } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const SignInComponent = () => {
 
-    const { setCurrentUser } = useContext(UserContext); 
+    const goTo = useHistory();
 
     const logGoogleUser = async () => {
         try {
             const user = await signInWithGooglePopup();
-
-            setCurrentUser(user);
              console.log("Logged in user:", user);
 
             if (user) {
                 const userDocRef = await createUserDocumentFromAuth(user);
                 console.log("User document reference:", userDocRef);
             }
+
+            goTo.push("/");
 
         } catch (error) {
             console.error("Error logging in with Google:", error.message);
