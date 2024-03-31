@@ -1,12 +1,10 @@
-
 import React from 'react'
 import { useState} from 'react';
 import { signInAuthUserWithEmailAndPassword} from '../../Utils/Firebase/Firebase.utils';
 import { FormInputComponent } from '../FormInput/FormInputComponent';
 import { ButtonComponent } from '../Button/ButtonComponent';
-
-
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import './LoginStyle.css'
 
 
 const defaultFormFIeld = {
@@ -14,9 +12,9 @@ const defaultFormFIeld = {
     password: '',
 }
 
-
-
 export const LogInComponent = () => {
+
+    const goTo = useHistory();
 
     const [formField, setFormField] = useState(defaultFormFIeld);
     const { email, password } = formField;
@@ -36,6 +34,8 @@ export const LogInComponent = () => {
             
           
             resetForm();
+            goTo.push("/")
+            
 
         } catch (error) {  
             if (error.code === "auth/wrong-password") {
@@ -44,6 +44,7 @@ export const LogInComponent = () => {
                 console.log('User not found');
             }
         };
+        
     }
 
     const handleChange = (e) => {
