@@ -1,9 +1,10 @@
 import React from 'react'
-import { useState, useContext } from 'react';
+import { useState} from 'react';
 import './SingUpFormCSS.css'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../Utils/Firebase/Firebase.utils';
 import { FormInputComponent } from '../FormInput/FormInputComponent';
 import { ButtonComponent } from '../Button/ButtonComponent';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const defaultFormFIeld = {
@@ -17,7 +18,7 @@ const defaultFormFIeld = {
 
 export const SingUpFormComponent = () => {
 
-    
+    const goTo = useHistory();
 
     const [formField, setFormField] = useState(defaultFormFIeld);
     const { displayName, email, password, confirmPassword } = formField;
@@ -54,6 +55,8 @@ export const SingUpFormComponent = () => {
             await createUserDocumentFromAuth(user, { displayName })
 
             resetForm();
+            goTo.push("/")
+
 
         } catch (error) {
             console.error('Error during user registration:', error.message);
