@@ -8,7 +8,7 @@ export const CheckOutItemComponent = ( {cartItem }) => {
 
     const { name, imageUrl, price, quantity} = cartItem;
 
-    const { clearItemFromCart, addItemToCart, removeItemToCart } =
+    const { clearItemFromCart, addItemToCart, removeItemToCart} =
     useContext(CartContext);
 
   const clearItemHandler = () => clearItemFromCart(cartItem);
