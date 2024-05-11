@@ -24,4 +24,3 @@ export const CategoriesProvider = ({ children }) => {
         <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>
     )
 }
-
