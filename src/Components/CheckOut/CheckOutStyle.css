@@ -41,3 +41,28 @@
     cursor: pointer;
   }
   
+
+  @media only screen and (max-width: 600px) {
+    .checkout-item-container {
+      flex-direction: column; /* Променете flex-direction на column за малки екрани */
+      align-items: flex-start; /* Променете align-items на flex-start за малки екрани */
+    }
+  
+    .checkout-item-container .image-container {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .checkout-item-container .name,
+    .checkout-item-container .quantity,
+    .checkout-item-container .price,
+    .checkout-item-container .remove-button {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    .checkout-container .checkout-header{
+      display: none;
+    }
+  }
