@@ -58,7 +58,7 @@ export const LogInComponent = () => {
     }
 
     return (
-        <div className='log-in-container'>
+        <div className='log-in-box'>
             <h2>Already have an account?</h2>
             <h1>Sign in whit your email and password </h1>
             <form onSubmit={handleSubmit} className="log-in-form">
