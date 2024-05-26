@@ -1,28 +1,49 @@
-.sing-in-container{
+.sing-in-container {
     width: 100%;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-   
- 
+
+
 }
-.log-in-container{
+
+.log-in-container {
     display: flex;
     flex-direction: column;
     width: 400px;
     margin-bottom: 20px;
-    
+
 
 }
-.sing-up-container{
+
+.sing-up-container {
     display: flex;
     flex-direction: column;
     width: 400px;
     margin-left: 20px;
-    
-    
+
+
 }
-.group{
+
+.group {
     padding: 0px 20px 0px 20px;
+}
+
+@media only screen and (max-width: 730px) {
+ 
+    .sing-up-container {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-bottom: 30px;
+
+    }
+
+    .log-in-container {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-bottom: 20px;
+    }
 }
